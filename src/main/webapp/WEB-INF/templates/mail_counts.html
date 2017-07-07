@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Mail Count</title>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/style.css}"/>
+</head>
+<body>
+	 <div th:replace="fragments/header :: header"></div>
+	<br/>
+	<h3>Mail Count Informations</h3>
+	<br/>
+	<div th:if="${mailCounts.empty}">
+	There is no mail count information to show.
+	</div>
+	<div th:if="${!mailCounts.empty}">
+		<table class = "table table-striped">
+			<tr>
+				<th>Project Name</th>
+				<th>Mail Count</th>
+				<th>Date</th>
+			</tr>
+			<tr th:each="mail : ${mailCounts}">
+				<td th:text="${mail.project.name}"></td>
+				<td th:text="${mail.sum}"></td>
+				<td th:text="${mail.date}"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Edit Alert Word</title>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/style.css}"/>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<br/>
+	<div>
+		<h3>Edit Alert Word Form</h3>
+		<br/>
+		<form class="form-inline" action="#" th:action="@{/settings/alert_words/__${updateAlertWord.id}__/update}"
+			th:object="${updateAlertWord}" method="post">
+			<div class="form-group">
+			<input type="hidden" th:field="*{id}" />
+			<input class="form-control" type="text" th:field="*{word}" placeholder="Alert Word" />
+			</div>
+			<span th:if="${#fields.hasErrors('word')}" th:errors="*{word}"></span>
+			<br /><br/>
+			<div class="form-group">
+			<select class="form-control" th:field="*{language}">
+				<option value="">Select Language</option>
+				<option th:each="language : ${T(com.zipc.epm.web.entity.AlertWord.Language).values()}" th:value="${language}" th:text="${language}"></option>
+			</select>
+			</div>
+			<span th:if="${#fields.hasErrors('language')}" th:errors="*{language}"></span>
+			<br/><br/>
+			<input  class="btn btn-default" type="submit" value="Edit" />
+		</form>
+	</div>
+</body>
+</html>

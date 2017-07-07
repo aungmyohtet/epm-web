@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Alert Word Count</title>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/style.css}"/>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<br/>
+	<h3>Alert Word Count Information</h3>
+	<br/>
+	<div th:if="${mails.empty}">
+	There is no alert word count information to show.
+	</div>
+	<div th:if="${!mails.empty}">	
+		<table class = "table table-striped">
+			<tr>
+				<th>Mail ID</th>
+				<th>Mail Address</th>
+				<th>Alert Word Count</th>
+				<th>Date</th>
+			</tr>
+			<tr th:each="mail : ${mails}">
+				<td th:text="${mail.id}"></td>
+				<td th:text="${mail.mailAddress.address}"></td>
+				<td th:text="${mail.alertWordCount.sum}"></td>
+				<td th:text="${mail.date}"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Update AlertWordCountSetting</title>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/style.css}"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<br/><br/>
+    <h3> Mail Count Setting</h3>
+    <br/>
+	<form class="form-inline" action="#" th:action="@{/settings/mail_count/__${id}__/update}" th:object="${mailCountSetting}" method="post">
+	   <input type="hidden" th:field="*{id}" />
+	   <div class="form-group">
+	   <input class="form-control" type="text" th:field="*{name}" placeholder="Name" readonly="readonly" />
+	   </div>
+	   <br/><br/>
+	   <div class="form-group">
+	   <input class="form-control" type="text" th:field="*{value}" placeholder="Value"/>
+	   </div>
+	   <span th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Invalid value</span>
+	   <br/><br/>
+	   <input class="btn btn-default" type="submit" value="Update"/>
+	</form>
+</body>
+</html>
