@@ -23,7 +23,7 @@
 			<div class="form-group">
 			<select class="form-control" th:field="*{language}">
 				<option value="">Select Language</option>
-				<option th:each="language : ${T(com.zipc.epm.web.entity.AlertWord.Language).values()}" th:value="${language}" th:text="${language}"></option>
+				<option th:each="language : ${T(com.zipc.epm.entity.AlertWord.Language).values()}" th:value="${language}" th:text="${language}"></option>
 			</select>
 			</div>
 			<span th:if="${#fields.hasErrors('language')}" th:errors="*{language}"></span>
