@@ -61,21 +61,25 @@ public class ProjectController {
 
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String showProjectList(Model model) {
-        model.addAttribute("project", new Project());
+        if (!model.containsAttribute("project")) {
+            model.addAttribute("project", new Project());
+        }
         model.addAttribute("projects", projectService.findAll());
         return "projects";
     }
 
     @RequestMapping(value = "/projects/add", method = RequestMethod.POST)
-    public String saveProject(@Validated @ModelAttribute Project project, BindingResult result, Model model) {
+    public String saveProject(@Validated @ModelAttribute("project") Project project, BindingResult result, Model model, RedirectAttributes attr) {
         if (result.hasErrors()) {
-            model.addAttribute("projects", projectService.findAll());
-            return "projects";
+            attr.addFlashAttribute("org.springframework.validation.BindingResult.project", result);
+            attr.addFlashAttribute("project", project);
+            return "redirect:/projects";
         }
         projectFormValidator.validate(project, result);
         if (result.hasErrors()) {
-            model.addAttribute("projects", projectService.findAll());
-            return "projects";
+            attr.addFlashAttribute("org.springframework.validation.BindingResult.project", result);
+            attr.addFlashAttribute("project", project);
+            return "redirect:/projects";
         }
         projectService.save(project);
         model.addAttribute("projects", this.projectService.findAll());
