@@ -6,7 +6,7 @@
     <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/style.css}"/>
 </head>
 <body>
-	<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/header :: header(${menuTitle})"></div>
 	<h3>Edit Mail Property Setting</h3>
 	<form class="form-inline" action="#" th:action="@{/mail_addresses/__${mailAddressId}__/mail_property_settings/__${updateMailPropertySetting.mailPropertyKey.id}__/update}" th:object="${updateMailPropertySetting}" method="post">
 		<input type="hidden" th:field="*{mailPropertyKey.id}" th:value="${updateMailPropertySetting.mailPropertyKey.id}" />

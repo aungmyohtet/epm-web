@@ -7,7 +7,7 @@
     <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/style.css}"/>
 </head>
 <body>
-	<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/header :: header(${menuTitle})"></div>
 	<br/><br/>
 		<h3>Mail Addresses</h3>
 		<form class="form-inline" action="#" th:action="@{/mail_addresses/add}"	th:object="${mailAddress}" method="post">

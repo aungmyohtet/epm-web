@@ -63,6 +63,7 @@ public class ProjectController {
     public String showProjectList(Model model) {
         model.addAttribute("project", new Project());
         model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("menuTitle", "projects");
         return "projects";
     }
 
@@ -70,12 +71,12 @@ public class ProjectController {
     public String saveProject(@Validated @ModelAttribute Project project, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("projects", projectService.findAll());
-            return "projects";
+            return "redirect:/projects";
         }
         projectFormValidator.validate(project, result);
         if (result.hasErrors()) {
             model.addAttribute("projects", projectService.findAll());
-            return "projects";
+            return "redirect:/projects";
         }
         projectService.save(project);
         model.addAttribute("projects", this.projectService.findAll());
@@ -113,6 +114,7 @@ public class ProjectController {
         if (!model.containsAttribute("mailCountRule")) {
             model.addAttribute("mailCountRule", mailCountRuleService.findByProject(projectService.findById(id)));
         }
+        model.addAttribute("menuTitle", "projects");
         return "project_setting";
     }
 
