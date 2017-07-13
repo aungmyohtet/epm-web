@@ -4,6 +4,30 @@
 <title>Update AlertWordCountSetting</title>
     <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
     <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/style.css}"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $(document).ready(function(){
+	$("#mailAddress").hide();
+		$("#text").focusin(function(){
+		var name= $("#settingName").val();
+			if(name == "last_analyzed_date"){
+				$("#text").datepicker({ dateFormat: "yy-mm-dd" });
+				$("#text").show();
+				$("#mailAddress").remove();
+			}
+			else if(name == "sender_mail"){
+				$("#mailAddress").show();
+				$("#text").remove();
+			}
+		else{
+				$("#mailAddress").remove();
+				$("#text").show();
+			}
+			});
+	});
+	</script>
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -13,15 +37,22 @@
 	<form class="form-inline" action="#" th:action="@{/settings/alert_word_count/__${id}__/update}" th:object="${alertWordCountSetting}" method="post">
 	   <input type="hidden" th:field="*{id}" />
 	   <div class="form-group">
-	   <input class="form-control" type="text" th:field="*{name}" placeholder="Name" readonly="readonly" />
+	   <input id="settingName" class="form-control" type="text" th:field="*{name}" placeholder="Name" readonly="readonly"/>
 	   </div>
 	   <br/><br/>
 	   <div class="form-group">
-	   <input class="form-control" type="text" th:field="*{value}" placeholder="Value"/>
+	   <input id="text" class="form-control" type="text" th:field="*{value}" placeholder="Value"/>
 	   </div>
-	   <span th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Invalid value</span>
-	   <br/><br/>
-	   <input class="btn btn-default" type="submit" value="Update"/>
+	   <div class="form-group">
+			<select id="mailAddress" class="form-control" th:field="*{value}">
+				<option th:each="mailaddress : ${mailaddresses}"
+					th:value="${mailaddress.address}"
+					th:text="${mailaddress.address}"/>
+			</select>
+		</div>
+	<span th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Invalid value</span>
+	<br/><br/>
+	<input class="btn btn-default" type="submit" value="Save"/>
 	</form>
 </body>
 </html>

@@ -180,6 +180,7 @@ public class NotificationSettingsController {
         if (alertWordCountSetting == null) {
             return "redirect:/bad/request";
         }
+        model.addAttribute("mailaddresses", mailAddressService.findAll());
         oldAlertWordCountSettingName = alertWordCountSetting.getName();
         oldAlertWordCountValue = alertWordCountSetting.getValue();
         return "update_alertwordcountsetting";
@@ -248,6 +249,7 @@ public class NotificationSettingsController {
         if (mailCountSetting == null) {
             return "redirect:/bad/request";
         }
+        model.addAttribute("mailaddresses", mailAddressService.findAll());
         oldMailCountSettingName = mailCountSetting.getName();
         oldMailCountValue = mailCountSetting.getValue();
         return "update_mailcountsetting";
@@ -277,7 +279,7 @@ public class NotificationSettingsController {
         return "redirect:/settings";
     }
 
-    //AlertWordCountListener
+    // AlertWordCountListener
     @RequestMapping(value = "/settings/alert_word_count_listeners/add", method = RequestMethod.POST)
     public String addAlertWordCountListener(@ModelAttribute AlertWordCountListener alertWordCountListener, BindingResult result, Model model, RedirectAttributes attr) {
 
@@ -301,7 +303,7 @@ public class NotificationSettingsController {
     @RequestMapping(value = "/settings/alert_word_count_listeners/{id}/delete", method = RequestMethod.GET)
     public String deleteAlertWordCountListener(@PathVariable("id") int id, Model model) {
         AlertWordCountListener alertWordCountListener = alertWordCountListenerService.findById(id);
-        if(alertWordCountListener == null) {
+        if (alertWordCountListener == null) {
             return "redirect:/invalid/request";
         }
         alertWordCountListenerService.remove(alertWordCountListener.getMailAddress().getId());
@@ -314,7 +316,7 @@ public class NotificationSettingsController {
         return "Bad Request!";
     }
 
-    //MailCountListener
+    // MailCountListener
     @RequestMapping(value = "/settings/mail_count_listeners/add", method = RequestMethod.POST)
     public String addMailCountListener(@Validated @ModelAttribute MailCountListener mailCountListener, BindingResult result, Model model, RedirectAttributes attr) {
 
@@ -341,7 +343,7 @@ public class NotificationSettingsController {
         return "redirect:/settings";
     }
 
-    //AlertWord
+    // AlertWord
     @RequestMapping(value = "/settings/alert_words/add", method = RequestMethod.POST)
     public String saveAlertWord(@Validated @ModelAttribute AlertWord alertWord, BindingResult result, Model model, RedirectAttributes attr) {
         if (result.hasErrors()) {
@@ -370,7 +372,7 @@ public class NotificationSettingsController {
     }
 
     @RequestMapping(value = "/settings/alert_words/{id}/update", method = RequestMethod.POST)
-    public String update(@Validated @ModelAttribute AlertWord updateAlertWord, BindingResult result, Model model,  RedirectAttributes attr) {
+    public String update(@Validated @ModelAttribute AlertWord updateAlertWord, BindingResult result, Model model, RedirectAttributes attr) {
         if (result.hasErrors()) {
             attr.addFlashAttribute("org.springframework.validation.BindingResult.updateAlertWord", result);
             attr.addFlashAttribute("updateAlertWord", updateAlertWord);
