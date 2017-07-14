@@ -45,12 +45,14 @@ public class ResultController {
     @RequestMapping(value = "/mails", method = RequestMethod.GET)
     public String showMailsResult(Model model) {
         model.addAttribute("mails", mailService.findAll());
+        model.addAttribute("menuTitle", "results");
         return "mails";
     }
 
     @RequestMapping(value = "/mail_counts", method = RequestMethod.GET)
     public String ShowMailCount(Model model) {
         model.addAttribute("mailCounts", mailCountService.findAll());
+        model.addAttribute("menuTitle", "results");
         return "mail_counts";
     }
 
@@ -64,6 +66,7 @@ public class ResultController {
             }
         }
         model.addAttribute("mails", mailsWithAlertWordCount);
+        model.addAttribute("menuTitle", "results");
         return "alert_word_counts";
     }
 }

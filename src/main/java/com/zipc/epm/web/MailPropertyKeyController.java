@@ -46,6 +46,7 @@ public class MailPropertyKeyController {
             model.addAttribute("mailPropertyKey", new MailPropertyKey());
         }
         model.addAttribute("mailPropertyKeys", this.mailPropertyKeyService.findAll());
+        model.addAttribute("menuTitle", "mail property keys");
         return "mail_property_keys";
     }
 
@@ -74,6 +75,7 @@ public class MailPropertyKeyController {
         if (!model.containsAttribute("mailPropertyKey")) {
             model.addAttribute("mailPropertyKey", this.mailPropertyKeyService.findById(id));
         }
+        model.addAttribute("menuTitle", "mail property keys");
         return "update_mail_property_key";
     }
 

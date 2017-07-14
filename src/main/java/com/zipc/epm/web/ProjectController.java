@@ -65,6 +65,7 @@ public class ProjectController {
             model.addAttribute("project", new Project());
         }
         model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("menuTitle", "projects");
         return "projects";
     }
 
@@ -117,6 +118,7 @@ public class ProjectController {
         if (!model.containsAttribute("mailCountRule")) {
             model.addAttribute("mailCountRule", mailCountRuleService.findByProject(projectService.findById(id)));
         }
+        model.addAttribute("menuTitle", "projects");
         return "project_setting";
     }
 

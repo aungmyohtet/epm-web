@@ -8,7 +8,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div th:replace="fragments/header :: header">
+<div th:replace="fragments/header :: header(${menuTitle})">
 </div>
 <img th:src="@{../../../resources/images/homedesign.PNG}" width="100%"/>
 </body>

@@ -62,6 +62,7 @@ public class MailAddressController {
         }
 
         model.addAttribute("mailAddresses", mailAddressService.findAll());
+        model.addAttribute("menuTitle", "mail addresses");
         return "mail_addresses";
     }
 
@@ -102,6 +103,7 @@ public class MailAddressController {
 
         model.addAttribute("mailPropertyKeys", mailPropertyKeyService.findAll());
         model.addAttribute("mailPropertySettings", mailAddress.getPropertySettings());
+        model.addAttribute("menuTitle", "mail addresses");
         oldMailAddress = mailAddress.getAddress();
         oldName = mailAddress.getName();
         return "mail_addresses_setting";
@@ -160,6 +162,7 @@ public class MailAddressController {
             model.addAttribute("updateMailPropertySetting", updateMailPropertySetting);
         }
         model.addAttribute("mailAddressId", mailAddressId);
+        model.addAttribute("menuTitle", "mail addresses");
         return "update_mail_property_setting";
     }
 

@@ -137,6 +137,7 @@ public class NotificationSettingsController {
         model.addAttribute("mailCountListeners", this.mailCountListenerService.findAll());
         model.addAttribute("mailaddresses", mailAddressService.findAll());
         model.addAttribute("alertWords", alertWordService.findAll());
+        model.addAttribute("menuTitle", "settings");
         return "settings";
     }
 
@@ -183,6 +184,7 @@ public class NotificationSettingsController {
         model.addAttribute("mailaddresses", mailAddressService.findAll());
         oldAlertWordCountSettingName = alertWordCountSetting.getName();
         oldAlertWordCountValue = alertWordCountSetting.getValue();
+        model.addAttribute("menuTitle", "settings");
         return "update_alertwordcountsetting";
     }
 
@@ -252,6 +254,7 @@ public class NotificationSettingsController {
         model.addAttribute("mailaddresses", mailAddressService.findAll());
         oldMailCountSettingName = mailCountSetting.getName();
         oldMailCountValue = mailCountSetting.getValue();
+        model.addAttribute("menuTitle", "settings");
         return "update_mailcountsetting";
     }
 
@@ -368,6 +371,7 @@ public class NotificationSettingsController {
         if (!model.containsAttribute("updateAlertWord")) {
             model.addAttribute("updateAlertWord", alertWordService.findById(id));
         }
+        model.addAttribute("menuTitle", "settings");
         return "edit_alert_word";
     }
 

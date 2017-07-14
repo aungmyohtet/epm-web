@@ -6,7 +6,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+<nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="header(menuTitle)">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -16,29 +16,29 @@
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li >
+            <ul class="nav navbar-nav" id="menu">
+                <li th:classappend="${menuTitle == 'home' ? 'active' : ''}">
                     <a href="#" th:href="@{/}">Home</a>
                 </li>
-                <li>
+                <li th:classappend="${menuTitle == 'projects' ? 'active' : ''}">
                     <a href="#" th:href="@{/projects}">Projects</a>
                 </li>
-                 <li>
+                <li th:classappend="${menuTitle == 'mail addresses' ? 'active' : ''}">
                     <a href="#" th:href="@{/mail_addresses}"> Mail Addresses </a>
                 </li>
-                <li>
+                <li th:classappend="${menuTitle == 'mail property keys' ? 'active' : ''}">
                     <a href="#" th:href="@{/mail_property_keys}"> Mail Property Keys </a>
                 </li>
-                <li>
+                <li th:classappend="${menuTitle == 'settings' ? 'active' : ''}">
                     <a href="#" th:href="@{/settings}"> Setting </a>
                 </li>
-                <li class="dropdown">
-                <a href="" class="dropbtn">Results</a>
-                <div class="dropdown-content">
-				    <a th:href="@{/mails}">Mails</a>
-					<a th:href="@{/mail_counts}">Mail Counts</a>
-					<a th:href="@{/alert_word_counts}">Alert Word Counts</a>
-				</div>
+                <li id="sub_dropdown" class="dropdown" th:classappend="${menuTitle == 'results' ? 'active' : ''}">
+					<a href="" class="dropbtn" onclick="return false">Results</a>
+	                <div class="dropdown-content">
+					    <a th:href="@{/mails}">Mails</a>
+						<a th:href="@{/mail_counts}">Mail Counts</a>
+						<a th:href="@{/alert_word_counts}">Alert Word Counts</a>
+					</div>
                 </li>
             </ul>
         </div>
