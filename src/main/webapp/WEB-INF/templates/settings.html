@@ -8,46 +8,47 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-	$(document).ready(function(){
-		$("#mailAddress").hide();
-		$("#combo").change(function (){
-			var settingName = $('#combo :selected').val();
+function changeAlertWordSettingName(){
+	$("#mailAddress").hide();
+	$("#combo").change(function (){
+		var settingName = $('#combo :selected').val();
+		if(settingName == "sender_mail"){
+			$("#mailAddress").append('<option th:each="mailaddress : ${mailaddresses}"
+				th:value="${mailaddress.address}"
+					th:text="${mailaddress.address}" />');
+			$("#mailAddress").show();
+			$("#text").remove();
+			$("#textAppend").append('<input id="text" class="form-control" type="text" placeholder="Value"/>');
+			$("#text").hide();
 		}
-			if(settingName == "sender_mail"){
-				$("#mailAddress").append('<option th:each="mailaddress : ${mailaddresses}"
-					th:value="${mailaddress.address}"
-						th:text="${mailaddress.address}" />');
-				$("#mailAddress").show();
-				$("#text").remove();
-				$("#textAppend").append('<input id="text" class="form-control" type="text" placeholder="Value"/>');
-				$("#text").hide();
-			}
-			else if(settingName == "last_analyzed_date"){
-				$("#text").val("");
-				$("#mailAddress").val("");
-				$("#mailAddress").hide();
-				$("#text").datepicker({ dateFormat: "yy-mm-dd" });
-				$("#text").show();
-			}
-			else{
-				$("#mailAddress").hide();
-				$("#mailAddress").val("");
-				$("#text").val("");
-				$("#text").datepicker("destroy");
-				$("#text").show();
-			}
-		});
-		$("#text").focusin(function () {
-			var name = $('#combo :selected').val();
-			if(name == "last_analyzed_date"){
-				$("#text").val("");
-				$("#mailAddress").val("");
-				$("#mailAddress").hide();
-				$("#text").datepicker({ dateFormat: "yy-mm-dd" });
-				$("#text").show();
-			}
-		});
-		$("#address").hide();
+		else if(settingName == "last_analyzed_date"){
+			$("#text").val("");
+			$("#mailAddress").empty();
+			$("#mailAddress").hide();
+			$("#text").datepicker({ dateFormat: "yy-mm-dd" });
+			$("#text").show();
+		}
+		else{
+			$("#mailAddress").empty();
+			$("#mailAddress").hide();
+			$("#text").val("");
+			$("#text").datepicker("destroy");
+			$("#text").show();
+		}
+	});
+	$("#text").focusin(function () {
+		var name = $('#combo :selected').val();
+		if(name == "last_analyzed_date"){
+			$("#text").val("");
+			$("#mailAddress").empty();
+			$("#mailAddress").hide();
+			$("#text").datepicker({ dateFormat: "yy-mm-dd" });
+			$("#text").show();
+		}
+	});
+}
+function changeMailCountSettingName(){
+	$("#address").hide();
 		$("#mailCountCombo").change(function () {
 			var settingName = $('#mailCountCombo :selected').val();
 				if(settingName == "sender_mail"){
@@ -61,14 +62,14 @@
 				}
 				else if(settingName == "last_analyzed_date"){
 					$("#textbox").val("");
-					$("#address").val("");
+					$("#address").empty();
 					$("#address").hide();
 					$("#textbox").datepicker({ dateFormat: "yy-mm-dd" });
 					$("#textbox").show();
 				}
 				else{
+					$("#address").empty();
 					$("#address").hide();
-					$("#address").val("");
 					$("#textbox").val("");
 					$("#textbox").datepicker("destroy");
 					$("#textbox").show();
@@ -78,12 +79,16 @@
 				var name = $('#mailCountCombo :selected').val();
 				if(name == "last_analyzed_date"){
 					$("#textbox").val("");
-					$("#address").val("");
+					$("#address").empty();
 					$("#address").hide();
 					$("#textbox").datepicker({ dateFormat: "yy-mm-dd" });
 				$("#textbox").show();
 				}
 			});
+}
+$(document).ready(function(){
+	changeAlertWordSettingName();
+	changeMailCountSettingName();
 	});
 </script>
 </head>
